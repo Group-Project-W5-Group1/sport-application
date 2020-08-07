@@ -1,4 +1,4 @@
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcryptjs')
 const salt = 10
 
 const encryptPassword = (password) => {
@@ -10,5 +10,6 @@ const decryptPassword = (password, hash) => {
 }
 
 module.exports = {
-    encryptPassword, decryptPassword
+    encryptPassword,
+    decryptPassword
 }

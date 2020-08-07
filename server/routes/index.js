@@ -1,14 +1,11 @@
+const route = require('express').Router()
+const userRoute = require('./userRoute')
+const sportsRoute = require('./sportsRoute')
+const Authentication = require('../middlewares/authentication')
+route.use('/', userRoute)
 
-const router = require('express').Router()
-const UserController = require('../controllers/user')
-const news = require(`./sportsRoute`)
-const Authentication = require('../middlewares/authenthication')
-
-router.post('/register', UserController.register)
-router.post('/login', UserController.login)
-router.post('/login/google', UserController.googleLogin)
-router.use(Authentication)
-router.use('/news', news) 
+route.use(Authentication)
+route.use('/sports', sportsRoute)
 
 
-module.exports = router 
+module.exports = route
