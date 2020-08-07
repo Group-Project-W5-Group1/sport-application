@@ -1,3 +1,4 @@
+
 function errorHandling (err, req, res, next) {
     if (err.name == "SequelizeValidationError" || err.name == "SequelizeUniqueConstraintError") {
         const errors = err.errors.map(el => ({
@@ -45,3 +46,4 @@ function errorHandling (err, req, res, next) {
 }
 
 module.exports = errorHandling
+
