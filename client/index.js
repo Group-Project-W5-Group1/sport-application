@@ -145,3 +145,25 @@ $(document).ready(function() {
 
 
 })
+
+function onSignIn(googleUser) {
+    let id_token = googleUser.getAuthResponse().id_token;
+
+    $.ajax({
+        method: `POST`,
+        url: `http://localhost:3000/login/google`,
+        data: {
+            id_tokencd 
+        }
+    })
+    .done((result) => {
+        localStorage.setItem(`access_token`, result.access_token)
+        homeAfterLogin()
+    })
+    .fail((err) => {
+        console.log(err)
+    })
+    .always(() => {
+
+    })
+}
