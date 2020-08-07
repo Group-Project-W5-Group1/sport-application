@@ -1,4 +1,5 @@
 const { User } = require('../models')
+
 const { generateToken } = require('../helpers/jwt')
 const { decryptPassword } = require('../helpers/bcrypt')
 const { OAuth2Client } = require('google-auth-library');
@@ -100,4 +101,5 @@ class UserController {
     }
 
 }
+
 module.exports = UserController
