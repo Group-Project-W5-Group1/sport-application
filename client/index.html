@@ -4,16 +4,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-signin-client_id" content="768509933864-36iftetl5paid9qce89lvpb74ff6atl6.apps.googleusercontent.com">
     <!-- CSS only -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/css/bootstrap.min.css" integrity="sha384-VCmXjywReHh4PwowAiWNagnWcLhlEJLA5buUprzK8rxFgeH0kww/aWY76TfkUoSX" crossorigin="anonymous">
     <title>Document</title>
 </head>
 
 <body>
+    <nav class="navbar navbar-dark bg-dark">
+        <a class="navbar-brand"><b>Sports</b></a>
+        <a id="logout-button" role="button" onclick="logoutButton()" class="btn btn-outline-danger my-2 my-sm-0 text-light font-weight-bold">Sign out</a>
+        <span id="login-button" class="text-light font-weight-bold">Already a user? Go &nbsp;<a onclick="loginButton()" role="button" class="font-weight-bold btn btn-outline-info my-2 my-sm-0">Sign in</a></span>
+    </nav>
+    <!-- Form Register -->
+    <section id="form-register">
+        <form class="mx-auto" style="width: 400px;" onsubmit="registerForm(event)">
+            <h1>Sign Up Below</h1>
+            <div class="form-group">
+                <label for="RegEmail">Email address</label>
+                <input type="email" class="form-control" id="registerEmail" aria-describedby="emailHelp">
+                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            </div>
+            <div class="form-group">
+                <label for="registerPassword">Password</label>
+                <input type="password" class="form-control" id="registerPassword">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+
+        </form>
+    </section>
+
+    <!-- Form Login -->
+    <section id="form-login">
+        <div id="alertLogin"></div>
+        <form class="mx-auto" style="width: 400px;" onsubmit="loginForm(event)">
+            <h1>Log In Below</h1>
+            <div class="form-group">
+                <label for="loginEmail">Email address</label>
+                <input type="email" class="form-control" id="loginEmail" aria-describedby="emailHelp">
+                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            </div>
+            <div class="form-group">
+                <label for="loginPassword">Password</label>
+                <input type="password" class="form-control" id="loginPassword">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="button" class="btn btn-link" onclick="RegisterPage(event)">Don't have an account? Click here.</button>
+
+            <b>or sign in through:</b><br><br>
+            <!-- SIGN IN PAKAI GOOGLE -->
+            <div class="mt-6 g-signin2" data-onsuccess="onSignIn"></div>
+            <br>
+        </form>
+        <br>
+
+    </section>
+
 
     <!-- Sports Lists -->
     <!-- Author:Grace -->
     <section class="sportListWeb">
+        <button type="button" class="btn btn-link" onclick="HomePageButton(event)">Back To HomePage</button>
         <p class="display-1">Sports Lists</p>
         <div class="col-sm-8 px-5 my-5">
             <div id="sportsLists"></div>
@@ -25,18 +76,24 @@
     <!-- Author:Grace -->
     <section>
         <div id="home-after-login">
+
+
             <div class="row">
                 <div class="col-sm-8 px-5 my-5">
                     <div id="before-page-search">
                         <h1>Checkout Below For Sports News</h1>
                         <br>
+                        <button type="button" class="btn btn-link" onclick="showSportsList(event)">Sports Lists</button>
+                        <button type="button" class="btn btn-link" onclick="showEnglandLeague(event)">England League</button>
+
+                        <br><br>
                         <form onsubmit="listNewsSearch(event)">
                             <label for="">Source Country:</label>
                             <select name="language" id="source">
                       <option value="us" selected>US</option>
                       <option value="id">Indonesia</option>
                       <option value="gb">UK</option>
-                    </select> &nbsp;
+                            </select> &nbsp;
                             <button class="btn btn-outline-dark font-weight-bold rounded-pill btn-sm" type="submit">Search</button>
                         </form>
                         <br>
@@ -55,10 +112,11 @@
                 </div>
                 <div class="col-sm-4 px-5 my-5">
                 </div>
+
             </div>
         </div>
-        </div>
-        </div>
+
+
     </section>
 
 
@@ -71,7 +129,7 @@
                 max-width: 100px;
             }
         </style>
-
+        <button type="button" class="btn btn-link" onclick="HomePageButton(event)">Back To HomePage</button>
         <div id="england-area">
             <p class="display-1">England Premier League</p>
             <p class="display-4">Regular Season</p>
@@ -97,6 +155,8 @@
 
     </section>
 
+    <link rel="stylesheet" href="https://unpkg.com/papercss@1.6.1/dist/paper.min.css">
+
     <!-- BootsTrap JS, Popper.js, and jQuery -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
@@ -104,7 +164,8 @@
 
     <!-- jquery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
+    <!-- google -->
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
 
     <script src="index.js"></script>
 
