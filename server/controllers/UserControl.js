@@ -1,6 +1,7 @@
 const { User } = require('../models')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
+const verifiyGoogle = require('../helpers/verifiyGoogleToken')
 
 class UserController {
     static register(req, res, next) {
@@ -41,8 +42,38 @@ class UserController {
             .catch(err => next(err))
     }
 
-    
-    
+    static async googleLogin(req, res, next) {
+        const google_token = req.headers.google_token
+
+        try {
+            const payload = await verifiyGoogle(google_token)
+            const email = payload.email
+            const user = await User.findOne({
+                where: {
+                    email
+                }
+            })
+            const password = process.env.DEFAULT_GOOGLE_PASSWORD
+            if(user) {
+                let check = bcrypt.compareSync(password, user.password)
+                if(check) {
+                    const token = jwt.sign({id: user.id, email: user.email, }, process.env.SECRET)
+                    res.status(200).json({user, token})
+                } else {
+                    
+                }
+            } else {
+                const newUser = await User.create({
+                    email,
+                    password
+                })
+                const token = jwt.sign({id: newUser.id, email: newUser.email, }, process.env.SECRET)
+                res.status(200).json({token})
+            }
+        } catch(err) {
+            next(err)
+        }
+    }
 }
 
 module.exports = UserController
